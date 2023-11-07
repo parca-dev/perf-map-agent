@@ -1,6 +1,7 @@
 name: Build
 
 on:
+  workflow_call:
   push:
     branches:
       - main
@@ -52,11 +53,6 @@ jobs:
           load: true
           platforms: linux/${{ matrix.arch }}
           tags: perf-map-agent-builder:latest
-
-      # - name: "Setup QEMU ${{ matrix.arch }}"
-      #   run: |
-      #     # Register QEMU
-      #     docker run --rm --privileged "docker.io/multiarch/qemu-user-static:${QEMU_VERSION}" --reset -p yes
 
       - name: "Run Builder ${{ matrix.arch }}"
         run: |
