@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.8.6)
+cmake_minimum_required (VERSION 2.8.6...3.5)
 project (perf-map-agent)
 
 # uncomment to make a debug build (including source positions and symbols)
@@ -8,7 +8,12 @@ project (perf-map-agent)
 set(OUTDIR ${PROJECT_BINARY_DIR}/out)
 set(LIBRARY_OUTPUT_PATH ${OUTDIR})
 
-find_package(JNI)
+# If the Java environment is properly NOT set, use the following:
+set(JAVA_INCLUDE_PATH "$ENV{JAVA_HOME}/include")
+set(JAVA_INCLUDE_PATH2 "$ENV{JAVA_HOME}/include/linux")
+set(JAVA_AWT_INCLUDE_PATH "$ENV{JAVA_HOME}/include")
+
+find_package(JNI REQUIRED)
 if (JNI_FOUND)
     message (STATUS "JNI_INCLUDE_DIRS=${JNI_INCLUDE_DIRS}")
     message (STATUS "JNI_LIBRARIES=${JNI_LIBRARIES}")
